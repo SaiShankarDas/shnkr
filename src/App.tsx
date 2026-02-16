@@ -1,5 +1,8 @@
 import { ThemeFocusProvider } from './context/ThemeFocusContext';
 import { Hero } from './components/Hero/Hero';
+import { About } from './components/About/About';
+import { Work } from './components/Work/Work';
+import { Contact } from './components/Contact/Contact';
 import { useEffect } from 'react';
 import Lenis from 'lenis';
 
@@ -27,11 +30,9 @@ function App() {
     <ThemeFocusProvider>
       <div className="bg-background min-h-screen text-foreground font-sans selection:bg-accent selection:text-white">
         <Hero />
-
-        {/* Placeholder for other sections */}
-        <div className="h-screen flex items-center justify-center bg-black/50">
-          <h2 className="text-4xl font-bold text-white/20">Content Below Fold</h2>
-        </div>
+        <About />
+        <Work />
+        <Contact />
       </div>
     </ThemeFocusProvider>
   );

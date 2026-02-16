@@ -8,15 +8,16 @@ export default {
     extend: {
       colors: {
         accent: {
-          DEFAULT: '#FF5500', // Vibrant Orange
-          hover: '#FF7722',
+          DEFAULT: '#F2540F', // Brand Orange
+          hover: '#CD4108', // Darker shade for hover
           foreground: '#FFFFFF',
         },
         background: '#050505', // Deep dark background
-        foreground: '#FAFAFA', // Off-white text
+        foreground: '#EFEEED', // Off-white text
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
+        custom: ['CustomFont', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-out forwards',

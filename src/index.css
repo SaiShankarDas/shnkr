@@ -4,14 +4,25 @@
 
 @layer base {
   :root {
-    --color-accent: 255 85 0; /* #FF5500 */
-    --color-bg: 5 5 5; /* #050505 */
+    --color-accent: 242 84 15;
+    /* #F2540F */
+    --color-bg: 5 5 5;
+    /* #050505 */
+  }
+
+  @font-face {
+    font-family: 'CustomFont';
+    src: url('/fonts/CustomFont.woff2') format('woff2'),
+      url('/fonts/CustomFont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
   }
 
   html {
     scroll-behavior: smooth;
   }
-  
+
   body {
     @apply bg-background text-foreground antialiased overflow-x-hidden;
   }
@@ -21,13 +32,16 @@
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: #111;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #333;
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #FF5500;
+  background: #F2540F;
 }
