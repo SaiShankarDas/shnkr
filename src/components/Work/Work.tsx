@@ -61,25 +61,25 @@ export const Work: React.FC = () => {
         <section ref={containerRef} className="bg-background overflow-hidden">
             <div ref={scrollContainerRef} className="flex h-screen w-[400vw]">
                 {projects.map((project) => (
-                    <div key={project.id} className="project-card w-screen h-screen flex flex-col justify-center px-12 md:px-24 border-r border-white/5 relative">
-                        <div className="absolute top-12 left-12 md:top-24 md:left-24 text-white/30 text-sm uppercase tracking-widest">
+                    <div key={project.id} className="project-card w-screen h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 border-r border-white/5 relative">
+                        <div className="absolute top-16 left-6 md:top-24 md:left-12 lg:left-24 text-white/30 text-xs md:text-sm uppercase tracking-widest">
                             {project.id.toString().padStart(2, '0')} / {projects.length.toString().padStart(2, '0')}
                         </div>
 
                         <div className="max-w-4xl">
-                            <h3 className="text-6xl md:text-9xl font-bold text-white mb-8 tracking-tighter">
+                            <h3 className="text-4xl md:text-6xl lg:text-9xl font-bold text-white mb-4 md:mb-8 tracking-tighter">
                                 {project.title}
                             </h3>
-                            <div className="flex flex-col md:flex-row gap-8 md:gap-16 text-xl md:text-2xl text-white/60">
+                            <div className="flex flex-col md:flex-row gap-4 md:gap-8 lg:gap-16 text-base md:text-xl lg:text-2xl text-white/60">
                                 <span>{project.category}</span>
                                 <span>{project.year}</span>
                             </div>
-                            <p className="mt-8 text-lg text-white/40 max-w-xl">
+                            <p className="mt-4 md:mt-8 text-sm md:text-lg text-white/40 max-w-xl">
                                 {project.description}
                             </p>
                         </div>
 
-                        <div className="absolute bottom-12 right-12 md:bottom-24 md:right-24">
+                        <div className="absolute bottom-8 right-6 md:bottom-12 md:right-12 lg:bottom-24 lg:right-24">
                             <button className="text-accent uppercase tracking-widest text-sm hover:text-white transition-colors">
                                 View Case Study
                             </button>

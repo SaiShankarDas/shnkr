@@ -30,11 +30,11 @@ function App() {
     <ThemeFocusProvider>
       <div className="bg-background min-h-screen text-foreground font-sans selection:bg-accent selection:text-white">
         {/* Fixed Logo Icon */}
-        <a href="/" className="fixed top-6 left-6 z-50">
+        <a href="/" className="fixed top-4 left-4 md:top-6 md:left-6 z-50">
           <img
             src="/logo-icon.svg"
             alt="SHKR.DEV"
-            className="w-10 h-10 hover:scale-110 transition-transform duration-300"
+            className="w-8 h-8 md:w-10 md:h-10 hover:scale-110 transition-transform duration-300"
           />
         </a>
         <Hero />

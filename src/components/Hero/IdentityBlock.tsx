@@ -8,7 +8,7 @@ export const IdentityBlock: React.FC = () => {
     const { currentTheme } = useThemeFocus();
 
     return (
-        <div className="flex flex-col items-start gap-8 z-20 pointer-events-none">
+        <div className="flex flex-col items-start gap-4 md:gap-8 z-20 pointer-events-none">
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -20,10 +20,10 @@ export const IdentityBlock: React.FC = () => {
 
             <div className="flex flex-col font-black tracking-tighter text-white mix-blend-difference font-custom">
                 {/* Visual Asset acting as main title */}
-                <LogoWithNeon className="w-full max-w-7xl h-auto mb-6" />
+                <LogoWithNeon className="w-full max-w-[280px] md:max-w-7xl h-auto mb-4 md:mb-6" />
             </div>
 
-            <div className="flex flex-col gap-2 mt-8 pointer-events-auto">
+            <div className="flex flex-col gap-1.5 md:gap-2 mt-4 md:mt-8 pointer-events-auto">
                 {Object.values(FOCUS_THEMES).map((theme, idx) => (
                     <div key={theme.id} className="flex items-center gap-4 text-white/50 text-sm">
                         <span className="font-mono text-xs opacity-50">#{String(idx + 1).padStart(2, '0')}</span>
