@@ -2,10 +2,31 @@ import React, { useRef, useEffect } from 'react';
 import { useScroll, useSpring, useTransform } from 'framer-motion';
 
 interface ParallaxCanvasProps {
-    images: HTMLImageElement[];
+    images: (HTMLImageElement | null)[];
     className?: string;
     scrollRef: React.RefObject<HTMLElement | null>;
 }
+
+/**
+ * Finds the nearest loaded frame to the target index.
+ */
+const findNearestLoaded = (
+    images: (HTMLImageElement | null)[],
+    target: number
+): HTMLImageElement | null => {
+    if (images[target]) return images[target];
+
+    // Search outward from target
+    for (let offset = 1; offset < images.length; offset++) {
+        if (target - offset >= 0 && images[target - offset]) {
+            return images[target - offset];
+        }
+        if (target + offset < images.length && images[target + offset]) {
+            return images[target + offset];
+        }
+    }
+    return null;
+};
 
 export const ParallaxCanvas: React.FC<ParallaxCanvasProps> = ({ images, className, scrollRef }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -36,7 +57,8 @@ export const ParallaxCanvas: React.FC<ParallaxCanvasProps> = ({ images, classNam
                 Math.max(0, Math.floor(frameIndex.get()))
             );
 
-            const img = images[idx];
+            // Use nearest loaded frame if target hasn't loaded yet
+            const img = findNearestLoaded(images, idx);
             if (!img) return;
 
             // Maintain aspect ratio cover

@@ -1,9 +1,9 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { useScroll, useTransform, motion } from 'framer-motion';
 import { IdentityBlock } from './IdentityBlock';
 import { ValueBlock } from './ValueBlock';
-import { ParallaxCanvas } from './ParallaxCanvas';
-import { useImagePreloader } from '../../hooks/useImagePreloader';
+import { SplineScene } from '@/components/ui/splite';
+import { Spotlight } from '@/components/ui/spotlight';
 
 export const Hero: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -11,8 +11,6 @@ export const Hero: React.FC = () => {
         target: containerRef,
         offset: ["start start", "end start"]
     });
-
-    const { images, isLoading, progress } = useImagePreloader(120);
 
     // Fade out hero content on scroll
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
@@ -22,30 +20,25 @@ export const Hero: React.FC = () => {
         <div ref={containerRef} className="h-[250vh] relative">
 
             {/* 
-        h-[250vh] gives use scroll space to drive the animation.
+        h-[250vh] gives us scroll space to drive the animation.
         The sticky container below stays fixed while we scroll through this height.
       */}
 
             <div className="sticky top-0 h-screen overflow-hidden bg-background rounded-b-[3rem] z-10">
 
-                {/* Loading Overlay */}
-                {isLoading && (
-                    <div className="absolute inset-0 z-50 bg-black flex items-center justify-center flex-col gap-4">
-                        <div className="text-accent font-bold text-xl tracking-widest">SHKR.DEV</div>
-                        <div className="w-64 h-[1px] bg-white/20 overflow-hidden relative">
-                            <motion.div
-                                className="absolute h-full bg-accent left-0"
-                                initial={{ width: 0 }}
-                                animate={{ width: `${progress}%` }}
-                            />
-                        </div>
-                        <div className="text-xs text-white/50">{progress}%</div>
-                    </div>
-                )}
+                {/* Spotlight Effect */}
+                <Spotlight
+                    className="-top-40 left-0 md:left-60 md:-top-20"
+                    fill="white"
+                />
 
                 {/* Background Layer */}
                 <motion.div style={{ scale }} className="absolute inset-0 z-0 bg-neutral-900 border-b border-white/10 rounded-b-[3rem] overflow-hidden">
-                    {!isLoading && <ParallaxCanvas images={images} scrollRef={containerRef} className="w-full h-full object-cover" />}
+                    {/* 3D Spline Robot */}
+                    <SplineScene
+                        scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                        className="w-full h-full"
+                    />
 
                     {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-br from-[#111] via-transparent to-[#000] opacity-60 pointer-events-none" />
