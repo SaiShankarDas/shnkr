@@ -8,31 +8,39 @@ gsap.registerPlugin(ScrollTrigger);
 const projects = [
     {
         id: 1,
-        title: "Neon Horizon",
-        category: "Creative Coding",
-        year: "2024",
-        description: "An interactive WebGL experience exploring light and motion.",
+        title: "Bharat Escapes",
+        category: "Travel Experience Platform",
+        year: "2025",
+        link: "https://www.bharatescapes.com/",
+        video: "/videos/desktop/project1_compressed.mp4",
+        videoMobile: "/videos/mobile/project1_compressed.mp4",
     },
     {
         id: 2,
-        title: "Velvet UI",
-        category: "Design System",
-        year: "2023",
-        description: "A comprehensive React component library focusing on accessibility.",
+        title: "WildFrame Safari",
+        category: "Luxury Safari Website",
+        year: "2025",
+        link: "https://wildframe-hxd1.vercel.app",
+        video: "/videos/desktop/project2_compressed.mp4",
+        videoMobile: "/videos/mobile/project2_compressed.mp4",
     },
     {
         id: 3,
-        title: "Echo",
-        category: "E-Commerce",
-        year: "2023",
-        description: "A headless Shopify storefront with advanced filtering and search.",
+        title: "Jawai Wild Soul",
+        category: "Boutique Safari Website",
+        year: "2026",
+        link: "https://www.jawaiwildsoul.in/",
+        video: "/videos/desktop/project3_compressed.mp4",
+        videoMobile: "/videos/mobile/project3_compressed.mp4",
     },
     {
         id: 4,
-        title: "Flux",
-        category: "Portfolio",
-        year: "2024",
-        description: "Minimalist portfolio template for creative professionals.",
+        title: "Nityog Impex",
+        category: "Spice Export Company Website",
+        year: "2026",
+        link: "https://nityog.vercel.app/",
+        video: "/videos/desktop/project4_compressed.mp4",
+        videoMobile: "/videos/mobile/project4_compressed.mp4",
     }
 ];
 
@@ -61,29 +69,79 @@ export const Work: React.FC = () => {
         <section ref={containerRef} className="bg-background overflow-hidden">
             <div ref={scrollContainerRef} className="flex h-screen w-[400vw]">
                 {projects.map((project) => (
-                    <div key={project.id} className="project-card w-screen h-screen flex flex-col justify-center px-6 md:px-12 lg:px-24 border-r border-white/5 relative">
-                        <div className="absolute top-16 left-6 md:top-24 md:left-12 lg:left-24 text-white/30 text-xs md:text-sm uppercase tracking-widest">
+                    <div key={project.id} className="project-card w-screen h-screen flex flex-col justify-end pb-24 md:justify-center md:pb-0 px-6 md:px-12 lg:px-24 border-r border-white/5 relative">
+
+                        {/* Video Background — Desktop */}
+                        {project.video && (
+                            <div className="absolute inset-0 z-0 hidden md:block">
+                                <video
+                                    src={project.video}
+                                    autoPlay
+                                    muted
+                                    loop
+                                    playsInline
+                                    preload="metadata"
+                                    className="w-full h-full object-cover"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/40" />
+                            </div>
+                        )}
+
+                        {/* Video Background — Mobile */}
+                        {project.videoMobile && (
+                            <div className="absolute inset-0 z-0 md:hidden">
+                                <video
+                                    src={project.videoMobile}
+                                    autoPlay
+                                    muted
+                                    loop
+                                    playsInline
+                                    preload="metadata"
+                                    className="w-full h-full object-cover"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/40" />
+                            </div>
+                        )}
+
+                        {/* Pagination — absolute on desktop, inline on mobile */}
+                        <div className="hidden md:block absolute top-24 left-12 lg:left-24 text-white/30 text-sm uppercase tracking-widest z-10">
                             {project.id.toString().padStart(2, '0')} / {projects.length.toString().padStart(2, '0')}
                         </div>
 
-                        <div className="max-w-4xl">
-                            <h3 className="text-4xl md:text-6xl lg:text-9xl font-bold text-white mb-4 md:mb-8 tracking-tighter">
+                        <div className="max-w-4xl relative z-10">
+                            {/* Mobile-only pagination inline */}
+                            <div className="md:hidden text-white/30 text-xs uppercase tracking-widest mb-6">
+                                {project.id.toString().padStart(2, '0')} / {projects.length.toString().padStart(2, '0')}
+                            </div>
+
+                            <h3 className="text-[8vw] md:text-6xl lg:text-8xl font-bold text-white mb-3 md:mb-8 tracking-tighter leading-[1.1] whitespace-nowrap">
                                 {project.title}
                             </h3>
-                            <div className="flex flex-col md:flex-row gap-4 md:gap-8 lg:gap-16 text-base md:text-xl lg:text-2xl text-white/60">
+
+                            <div className="flex items-center gap-3 text-sm md:text-xl lg:text-2xl text-white/50">
                                 <span>{project.category}</span>
+                                <span className="w-1 h-1 rounded-full bg-white/30" />
                                 <span>{project.year}</span>
                             </div>
-                            <p className="mt-4 md:mt-8 text-sm md:text-lg text-white/40 max-w-xl">
-                                {project.description}
-                            </p>
+
+                            {project.link ? (
+                                <a
+                                    href={project.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 mt-6 md:mt-10 text-accent uppercase tracking-widest text-xs md:text-sm hover:text-white transition-colors"
+                                >
+                                    Visit Website
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="md:w-4 md:h-4">
+                                        <path d="M7 17L17 7" />
+                                        <path d="M7 7h10v10" />
+                                    </svg>
+                                </a>
+                            ) : (
+                                <div className="mt-6 md:mt-10 h-5 md:h-6" aria-hidden="true" />
+                            )}
                         </div>
 
-                        <div className="absolute bottom-8 right-6 md:bottom-12 md:right-12 lg:bottom-24 lg:right-24">
-                            <button className="text-accent uppercase tracking-widest text-sm hover:text-white transition-colors">
-                                View Case Study
-                            </button>
-                        </div>
                     </div>
                 ))}
             </div>
