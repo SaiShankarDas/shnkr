@@ -49,9 +49,9 @@ export const Work: React.FC = () => {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
-        const sections = gsap.utils.toArray('.project-card');
+        const sections = gsap.utils.toArray<HTMLElement>('.project-card');
 
-        gsap.to(sections, {
+        const scrollTween = gsap.to(sections, {
             xPercent: -100 * (sections.length - 1),
             ease: "none",
             scrollTrigger: {
@@ -61,6 +61,24 @@ export const Work: React.FC = () => {
                 snap: 1 / (sections.length - 1),
                 end: () => "+=" + (scrollContainerRef.current?.offsetWidth || 0),
             }
+        });
+
+        // Staggered content entrance for each card
+        sections.forEach((card) => {
+            const animElements = card.querySelectorAll('.card-anim');
+            gsap.from(animElements, {
+                y: 40,
+                opacity: 0,
+                stagger: 0.12,
+                duration: 0.8,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: card,
+                    containerAnimation: scrollTween,
+                    start: 'left 80%',
+                    toggleActions: 'play none none reset',
+                },
+            });
         });
 
     }, { scope: containerRef });
@@ -104,21 +122,21 @@ export const Work: React.FC = () => {
                         )}
 
                         {/* Pagination — absolute on desktop, inline on mobile */}
-                        <div className="hidden md:block absolute top-24 left-12 lg:left-24 text-white/30 text-sm uppercase tracking-widest z-10">
+                        <div className="card-anim hidden md:block absolute top-24 left-12 lg:left-24 text-white/30 text-sm uppercase tracking-widest z-10">
                             {project.id.toString().padStart(2, '0')} / {projects.length.toString().padStart(2, '0')}
                         </div>
 
                         <div className="max-w-4xl relative z-10">
                             {/* Mobile-only pagination inline */}
-                            <div className="md:hidden text-white/30 text-xs uppercase tracking-widest mb-6">
+                            <div className="card-anim md:hidden text-white/30 text-xs uppercase tracking-widest mb-6">
                                 {project.id.toString().padStart(2, '0')} / {projects.length.toString().padStart(2, '0')}
                             </div>
 
-                            <h3 className="text-[8vw] md:text-6xl lg:text-8xl font-bold text-white mb-3 md:mb-8 tracking-tighter leading-[1.1] whitespace-nowrap">
+                            <h3 className="card-anim text-[8vw] md:text-6xl lg:text-8xl font-bold text-white mb-3 md:mb-8 tracking-tighter leading-[1.1] whitespace-nowrap">
                                 {project.title}
                             </h3>
 
-                            <div className="flex items-center gap-3 text-sm md:text-xl lg:text-2xl text-white/50">
+                            <div className="card-anim flex items-center gap-3 text-sm md:text-xl lg:text-2xl text-white/50">
                                 <span>{project.category}</span>
                                 <span className="w-1 h-1 rounded-full bg-white/30" />
                                 <span>{project.year}</span>
@@ -129,7 +147,7 @@ export const Work: React.FC = () => {
                                     href={project.link}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 mt-6 md:mt-10 text-accent uppercase tracking-widest text-xs md:text-sm hover:text-white transition-colors"
+                                    className="card-anim inline-flex items-center gap-2 mt-6 md:mt-10 text-accent uppercase tracking-widest text-xs md:text-sm hover:text-white transition-colors"
                                 >
                                     Visit Website
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="md:w-4 md:h-4">
@@ -138,7 +156,7 @@ export const Work: React.FC = () => {
                                     </svg>
                                 </a>
                             ) : (
-                                <div className="mt-6 md:mt-10 h-5 md:h-6" aria-hidden="true" />
+                                <div className="card-anim mt-6 md:mt-10 h-5 md:h-6" aria-hidden="true" />
                             )}
                         </div>
 

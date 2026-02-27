@@ -21,7 +21,7 @@ export const FOCUS_THEMES: Record<FocusThemeId, FocusTheme> = {
         shortLabel: 'Animated Websites',
         description: 'Scroll-driven animated websites with high-performance motion.',
         accentColor: '#FF5500',
-        heroTitle: ['SHKR', '.DEV']
+        heroTitle: ['SHNKR', '.DEV']
     },
     'internal-tools': {
         id: 'internal-tools',
@@ -38,7 +38,7 @@ export const FOCUS_THEMES: Record<FocusThemeId, FocusTheme> = {
         // I will use Orange as default but maybe vary slightly or stick to Orange if "Black + Orange" is a hard constraint.
         // I will use Orange for the main brand, but maybe I should stick to Orange for match.
         // Let's assume Orange is the KEY brand color.
-        heroTitle: ['SHKR', '.TOOLS']
+        heroTitle: ['SHNKR', '.TOOLS']
     },
     'ai-web-apps': {
         id: 'ai-web-apps',
@@ -46,7 +46,7 @@ export const FOCUS_THEMES: Record<FocusThemeId, FocusTheme> = {
         shortLabel: 'AI Web Apps',
         description: 'Modern web apps powered by AI workflows.',
         accentColor: '#FF5500',
-        heroTitle: ['SHKR', '.APP']
+        heroTitle: ['SHNKR', '.APP']
     },
     'motion-graphics': {
         id: 'motion-graphics',
@@ -54,7 +54,7 @@ export const FOCUS_THEMES: Record<FocusThemeId, FocusTheme> = {
         shortLabel: 'Motion Graphics',
         description: 'Cinematic layout and motion design for the web.',
         accentColor: '#FF5500',
-        heroTitle: ['SHKR', '.MOV']
+        heroTitle: ['SHNKR', '.MOV']
     },
     'vibecoding': {
         id: 'vibecoding',
@@ -62,7 +62,7 @@ export const FOCUS_THEMES: Record<FocusThemeId, FocusTheme> = {
         shortLabel: 'Vibecoding',
         description: 'Learn to code with AI and "vibes".',
         accentColor: '#FF5500',
-        heroTitle: ['SHKR', '.VIBE']
+        heroTitle: ['SHNKR', '.VIBE']
     }
 };
 

@@ -45,3 +45,18 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #F2540F;
 }
+
+/* Sound toggle equalizer bars */
+@keyframes equalizer {
+  0% {
+    transform: scaleY(0.4);
+  }
+
+  50% {
+    transform: scaleY(1);
+  }
+
+  100% {
+    transform: scaleY(0.6);
+  }
+}

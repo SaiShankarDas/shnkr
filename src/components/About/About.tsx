@@ -2,37 +2,97 @@ import React, { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
 import { LiquidEffectAnimation } from '@/components/ui/liquid-effect-animation';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export const About: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
     const textRef = useRef<HTMLParagraphElement>(null);
+    const stackRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
-        const tl = gsap.timeline({
+        // Section crossfade — fade out as you scroll past
+        gsap.to(containerRef.current, {
+            opacity: 0,
+            y: -60,
+            ease: 'none',
             scrollTrigger: {
                 trigger: containerRef.current,
-                start: 'top 80%',
-                end: 'bottom 20%',
-                toggleActions: 'play none none reverse',
-            }
+                start: 'bottom 60%',
+                end: 'bottom top',
+                scrub: true,
+            },
         });
 
-        tl.from(titleRef.current, {
-            y: 50,
+        // Title — clip-path wipe reveal
+        gsap.from(titleRef.current, {
+            clipPath: 'inset(0 100% 0 0)',
+            duration: 1,
+            ease: 'power4.inOut',
+            scrollTrigger: {
+                trigger: titleRef.current,
+                start: 'top 85%',
+                end: 'top 40%',
+                scrub: 1,
+            },
+        });
+
+        // Paragraph — split into lines, reveal each line on scroll
+        const split = SplitText.create(textRef.current, {
+            type: 'lines',
+            linesClass: 'split-line',
+            mask: 'lines',
+        });
+
+        gsap.from(split.lines, {
+            y: 40,
             opacity: 0,
-            duration: 0.8,
-            ease: "power3.out"
-        })
-            .from(textRef.current, {
-                y: 30,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: textRef.current,
+                start: 'top 80%',
+                end: 'bottom 50%',
+                scrub: 1,
+            },
+        });
+
+        // Stack & Services — stagger from left
+        const items = stackRef.current?.querySelectorAll('li');
+        if (items) {
+            gsap.from(items, {
+                x: -30,
                 opacity: 0,
-                duration: 0.8,
-                ease: "power3.out"
-            }, "-=0.4");
+                stagger: 0.08,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: stackRef.current,
+                    start: 'top 85%',
+                    end: 'top 50%',
+                    scrub: 1,
+                },
+            });
+        }
+
+        // Headings for Stack/Services
+        const headings = stackRef.current?.querySelectorAll('h3');
+        if (headings) {
+            gsap.from(headings, {
+                y: 20,
+                opacity: 0,
+                stagger: 0.1,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: stackRef.current,
+                    start: 'top 88%',
+                    end: 'top 60%',
+                    scrub: 1,
+                },
+            });
+        }
 
     }, { scope: containerRef });
 
@@ -65,7 +125,7 @@ export const About: React.FC = () => {
                             Every project is built from scratch — no templates, no shortcuts — just clean architecture and intentional design.
                         </p>
 
-                        <div className="mt-8 md:mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 text-sm uppercase tracking-widest text-white/40">
+                        <div ref={stackRef} className="mt-8 md:mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 text-sm uppercase tracking-widest text-white/40">
                             <div>
                                 <h3 className="text-white mb-4">Stack</h3>
                                 <ul className="space-y-2">
