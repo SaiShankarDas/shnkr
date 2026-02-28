@@ -36,7 +36,7 @@ export const Contact: React.FC = () => {
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} className="min-h-screen flex flex-col justify-center px-4 md:px-12 pt-20 pb-12 md:py-24 bg-accents w-full relative overflow-hidden">
+        <section id="contact" ref={containerRef} className="min-h-screen flex flex-col justify-center px-4 md:px-12 pt-20 pb-12 md:py-24 bg-accents w-full relative overflow-hidden">
             {/* Background decoration */}
             <div className="absolute top-0 right-0 w-[50vh] h-[50vh] bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
 
@@ -58,17 +58,18 @@ export const Contact: React.FC = () => {
                     <div>
                         <h3 className="text-white/50 uppercase tracking-widest text-sm mb-4">Socials</h3>
                         <div className="flex flex-wrap gap-4 md:gap-8">
-                            {['Twitter', 'LinkedIn', 'GitHub', 'Instagram'].map((social) => (
-                                <a key={social} href="#" className="text-base md:text-xl text-white hover:text-accent transition-colors">
-                                    {social}
-                                </a>
-                            ))}
+                            <a href="https://www.linkedin.com/in/sai-shankar-das" target="_blank" rel="noopener noreferrer" className="text-base md:text-xl text-white hover:text-accent transition-colors">
+                                LinkedIn
+                            </a>
+                            <a href="https://www.instagram.com/shnkr.dev.in/" target="_blank" rel="noopener noreferrer" className="text-base md:text-xl text-white hover:text-accent transition-colors">
+                                Instagram
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <div className="mt-16 md:mt-32 text-white/20 text-xs md:text-sm flex flex-col md:flex-row gap-2 md:gap-0 justify-between items-center md:items-end">
-                    <span>© 2024 SHNKR.DEV</span>
+                    <span>© 2025 SHNKR.DEV</span>
                     <span>Designed & Developed by Sai Shankar Das</span>
                 </div>
             </div>

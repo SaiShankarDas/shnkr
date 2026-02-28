@@ -252,7 +252,7 @@ export const BookingCTA: React.FC = () => {
             time: selectedTime,
             name: form.name,
             email: form.email,
-            phone: `${selectedCountry.dial_code} ${form.phone}`,
+            phone: `${selectedCountry.dial_code.replace('+', '')} ${form.phone}`,
             timestamp: new Date().toISOString(),
         };
 
@@ -283,7 +283,7 @@ export const BookingCTA: React.FC = () => {
     };
 
     return (
-        <section className="py-20 md:py-28 px-4 md:px-12 bg-background border-t border-white/[0.04]">
+        <section id="booking" className="py-20 md:py-28 px-4 md:px-12 bg-background border-t border-white/[0.04]">
             <div className="max-w-[1600px] mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
                     {/* Left — Copy */}
