@@ -118,7 +118,7 @@ export const About: React.FC = () => {
                     </div>
                     <div>
                         <p ref={textRef} className="text-base md:text-xl lg:text-2xl leading-relaxed text-white/80 max-w-2xl">
-                            I craft modern, high-performance websites that turn ideas into digital experiences.
+                            I craft modern, high-performance websites that turn ideas <span className="whitespace-nowrap">into digital experiences.</span>
                             <br /><br />
                             With a strong foundation in frontend architecture and user-centric design, I build scalable web platforms that are fast, elegant, and <span className="text-accent">engineered for growth</span>.
                             <br /><br />

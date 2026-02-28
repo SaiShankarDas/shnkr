@@ -15,7 +15,7 @@ export const IdentityBlock: React.FC = () => {
                 transition={{ delay: 0.2 }}
                 className="text-accent text-sm font-medium tracking-widest uppercase"
             >
-                Hey, welcome to
+                Freelance Developer & Designer
             </motion.div>
 
             <div className="flex flex-col font-black tracking-tighter text-white mix-blend-difference font-custom">

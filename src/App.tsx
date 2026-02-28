@@ -3,6 +3,13 @@ import { Hero } from './components/Hero/Hero';
 import { About } from './components/About/About';
 import { Work } from './components/Work/Work';
 import { Contact } from './components/Contact/Contact';
+import { Metrics } from './components/Metrics/Metrics';
+import { Testimonials } from './components/Testimonials/Testimonials';
+import { Process } from './components/Process/Process';
+import { CTABanner } from './components/CTABanner/CTABanner';
+import { FAQ } from './components/FAQ/FAQ';
+import { BookingCTA } from './components/BookingCTA/BookingCTA';
+import { Comparison } from './components/Comparison/Comparison';
 import { LoadingScreen } from './components/LoadingScreen/LoadingScreen';
 import { SoundToggle } from './components/SoundToggle/SoundToggle';
 import { useEffect, useState, useCallback } from 'react';
@@ -69,7 +76,14 @@ function App() {
         <SoundToggle />
         <Hero />
         <About />
+        <Metrics />
         <Work />
+        <Testimonials />
+        <Process />
+        <Comparison />
+        <CTABanner />
+        <FAQ />
+        <BookingCTA />
         <Contact />
       </div>
     </ThemeFocusProvider>
