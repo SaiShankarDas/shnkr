@@ -51,8 +51,8 @@ export const Contact: React.FC = () => {
                 <div className="flex flex-col md:flex-row gap-8 md:gap-24 mt-8 md:mt-12 border-t border-white/10 pt-8 md:pt-12">
                     <div>
                         <h3 className="text-white/50 uppercase tracking-widest text-sm mb-4">Email</h3>
-                        <a href="mailto:hello@shnkr.dev" className="text-xl md:text-2xl lg:text-3xl text-white hover:text-accent transition-colors break-all">
-                            hello@shnkr.dev
+                        <a href="mailto:shnkr.dev.in@gmail.com" className="text-xl md:text-2xl lg:text-3xl text-white hover:text-accent transition-colors break-all">
+                            shnkr.dev.in@gmail.com
                         </a>
                     </div>
                     <div>

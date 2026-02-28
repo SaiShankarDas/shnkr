@@ -40,10 +40,10 @@ export const CTABanner: React.FC = () => {
                             <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                         </a>
                         <a
-                            href="mailto:hello@shnkr.dev"
+                            href="mailto:shnkr.dev.in@gmail.com"
                             className="inline-flex items-center gap-2 px-8 py-4 border border-white/10 text-white/60 text-sm md:text-base uppercase tracking-wider rounded-full hover:border-white/30 hover:text-white transition-all duration-300"
                         >
-                            hello@shnkr.dev
+                            shnkr.dev.in@gmail.com
                         </a>
                     </div>
                 </motion.div>

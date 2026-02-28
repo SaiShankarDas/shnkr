@@ -207,6 +207,20 @@ export const BookingCTA: React.FC = () => {
     const [phoneError, setPhoneError] = useState('');
     const [submitting, setSubmitting] = useState(false);
 
+    // Auto-reset booking form 10s after confirmation
+    useEffect(() => {
+        if (step !== 'done') return;
+        const timer = setTimeout(() => {
+            setStep('date');
+            setSelectedDate(null);
+            setSelectedTime(null);
+            setForm({ name: '', email: '', phone: '' });
+            setPhoneError('');
+            setSelectedCountry(countryCodes[0]);
+        }, 10000);
+        return () => clearTimeout(timer);
+    }, [step]);
+
     const handleDateSelect = (d: Date) => {
         setSelectedDate(d);
         setStep('time');
@@ -236,14 +250,27 @@ export const BookingCTA: React.FC = () => {
         const bookingData = {
             date: selectedDate?.toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
             time: selectedTime,
-            countryCode: selectedCountry.dial_code,
-            ...form,
+            name: form.name,
+            email: form.email,
+            phone: `${selectedCountry.dial_code} ${form.phone}`,
+            timestamp: new Date().toISOString(),
         };
-        console.log('Booking submitted:', bookingData);
 
-        await new Promise(r => setTimeout(r, 1200));
-        setSubmitting(false);
-        setStep('done');
+        try {
+            const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzNFBuI8GzUlL7o6GLgfxJxYf9rivItzuBzr2ygMnSKIQO3F0X3TOXU5rQhB6rMLt3X/exec';
+            await fetch(SHEET_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(bookingData),
+            });
+            setStep('done');
+        } catch (err) {
+            console.error('Booking submission failed:', err);
+            alert('Something went wrong. Please try again.');
+        } finally {
+            setSubmitting(false);
+        }
     };
 
     const formatSelectedDate = (d: Date) =>
@@ -429,7 +456,7 @@ export const BookingCTA: React.FC = () => {
                                                 disabled={submitting}
                                                 className="w-full py-3.5 bg-accent text-white text-sm font-medium uppercase tracking-wider rounded-lg hover:shadow-[0_0_30px_rgba(242,84,15,0.25)] transition-all duration-300 disabled:opacity-50 cursor-pointer"
                                             >
-                                                {submitting ? 'Booking...' : 'Confirm Booking'}
+                                                {submitting ? 'Booking...' : 'Book Discovery Call'}
                                             </button>
                                         </form>
                                     </motion.div>
