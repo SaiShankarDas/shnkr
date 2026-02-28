@@ -25,7 +25,6 @@ const isPast = (d: Date) => {
     return d < today;
 };
 
-const isSunday = (d: Date) => d.getDay() === 0;
 
 type Step = 'date' | 'time' | 'details' | 'done';
 
