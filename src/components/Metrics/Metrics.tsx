@@ -47,7 +47,7 @@ const AnimatedNumber: React.FC<{ target: number }> = ({ target }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
         >
-            <CountUp target={target} duration={2000} />
+            <CountUp target={target} duration={3500} />
         </motion.span>
     );
 };
