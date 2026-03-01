@@ -17,7 +17,11 @@ const getVideoAssets = () => {
 
 const IMAGE_ASSETS = [
     'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=1200&q=80',
+    '/headshot.webp',
+    '/logo-icon.svg',
 ];
+
+const AUDIO_ASSETS = ['/audio/ambient.mp3'];
 
 const MIN_DURATION = 2800; // Minimum time the loader stays visible (ms)
 
@@ -38,6 +42,16 @@ const preloadImage = (src: string): Promise<void> =>
         img.src = src;
         img.onload = () => resolve();
         img.onerror = () => resolve();
+        setTimeout(resolve, 5000);
+    });
+
+const preloadAudio = (src: string): Promise<void> =>
+    new Promise((resolve) => {
+        const audio = new Audio();
+        audio.preload = 'auto';
+        audio.src = src;
+        audio.oncanplaythrough = () => resolve();
+        audio.onerror = () => resolve();
         setTimeout(resolve, 5000);
     });
 
@@ -97,12 +111,14 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
     // Preload all assets
     useEffect(() => {
         const videos = getVideoAssets();
-        const allAssets = [...IMAGE_ASSETS, ...videos];
+        const allAssets = [...IMAGE_ASSETS, ...AUDIO_ASSETS, ...videos];
         let loaded = 0;
 
         const loadAsset = async (asset: string) => {
             if (asset.endsWith('.mp4')) {
                 await preloadVideo(asset);
+            } else if (asset.endsWith('.mp3')) {
+                await preloadAudio(asset);
             } else {
                 await preloadImage(asset);
             }
