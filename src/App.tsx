@@ -12,6 +12,7 @@ import { BookingCTA } from './components/BookingCTA/BookingCTA';
 import { Comparison } from './components/Comparison/Comparison';
 import { LoadingScreen } from './components/LoadingScreen/LoadingScreen';
 import { SoundToggle } from './components/SoundToggle/SoundToggle';
+import { WhatsAppCTA } from './components/WhatsAppCTA/WhatsAppCTA';
 import { useEffect, useState, useCallback } from 'react';
 import Lenis from 'lenis';
 import { motion, useScroll, useSpring } from 'framer-motion';
@@ -74,6 +75,7 @@ function App() {
           />
         </a>
         <SoundToggle />
+        <WhatsAppCTA />
         <Hero />
         <About />
         <Metrics />
