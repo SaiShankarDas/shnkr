@@ -46,48 +46,69 @@ const projects = [
 
 export const Work: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const scrollContainerRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
-        const sections = gsap.utils.toArray<HTMLElement>('.project-card');
+        const cards = gsap.utils.toArray<HTMLElement>('.project-card');
+        const totalCards = cards.length;
 
-        const scrollTween = gsap.to(sections, {
-            xPercent: -100 * (sections.length - 1),
-            ease: "none",
+        // Set initial position: all cards except the first start off-screen right
+        cards.forEach((card, i) => {
+            if (i > 0) {
+                gsap.set(card, { xPercent: 100 });
+            }
+        });
+
+        // Build a master timeline for the stacking sequence
+        const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: containerRef.current,
                 pin: true,
                 scrub: 1,
-                snap: 1 / (sections.length - 1),
-                end: () => "+=" + (scrollContainerRef.current?.offsetWidth || 0),
+                snap: {
+                    snapTo: 1 / (totalCards - 1),
+                    duration: { min: 0.15, max: 0.4 },
+                    ease: 'power1.inOut',
+                },
+                end: () => `+=${window.innerHeight * (totalCards - 1)}`,
             }
         });
 
-        // Staggered content entrance for each card
-        sections.forEach((card) => {
-            const animElements = card.querySelectorAll('.card-anim');
-            gsap.from(animElements, {
-                y: 40,
-                opacity: 0,
-                stagger: 0.12,
-                duration: 0.8,
+        // Sequentially slide each card in from the right
+        cards.forEach((card, i) => {
+            if (i === 0) return;
+
+            const animEls = card.querySelectorAll('.card-anim');
+            // Hide content initially
+            gsap.set(animEls, { y: 30, opacity: 0 });
+
+            // Slide the card in
+            tl.to(card, {
+                xPercent: 0,
+                duration: 1,
+                ease: 'none',
+            });
+
+            // Animate the content in after the card lands
+            tl.to(animEls, {
+                y: 0,
+                opacity: 1,
+                stagger: 0.08,
+                duration: 0.3,
                 ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: card,
-                    containerAnimation: scrollTween,
-                    start: 'left 80%',
-                    toggleActions: 'play none none reset',
-                },
             });
         });
 
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} className="bg-background overflow-hidden">
-            <div ref={scrollContainerRef} className="flex h-screen w-[400vw]">
-                {projects.map((project) => (
-                    <div key={project.id} className="project-card w-screen h-screen flex flex-col justify-end pb-24 md:justify-center md:pb-0 px-6 md:px-12 lg:px-24 border-r border-white/5 relative">
+        <section ref={containerRef} className="bg-background overflow-hidden relative h-screen">
+            <div className="relative w-screen h-screen">
+                {projects.map((project, index) => (
+                    <div
+                        key={project.id}
+                        className="project-card absolute inset-0 w-screen h-screen flex flex-col justify-end pb-24 md:justify-center md:pb-0 px-6 md:px-12 lg:px-24 border-r border-white/5"
+                        style={{ zIndex: index + 1 }}
+                    >
 
                         {/* Video Background — Desktop */}
                         {project.video && (
